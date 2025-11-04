@@ -1,5 +1,22 @@
-## Website Top-up Money By TrueWallet And Scb QrCode Sendbox API
-#Use API True Wallet and Scb QrCode Sendbox API
+## 💰 Website Top-up Money By TrueWallet And SCB QrCode Sandbox API
+
+ใช้ API ของ **TrueMoney Wallet** และ **SCB QrCode (Sandbox)**  
+สำหรับระบบเติมเงินอัตโนมัติบนเว็บขายไอดีเกม 🎮
+
+---
+
+### 🚀 วิธีใช้งานเบื้องต้น
+
+```bash
+git clone https://github.com/sharkvortex/Scb_Sendbox_Api-True_Wallet_TopUp
 
 
-## เว็บระบบเติมเงินด้วย ทรูมันนี่ วอเล็ท และ เติมผ่าน QrCode ธนาคาร ไทยพาณิชย์
+docker-compose up -d --build
+
+
+http://localhost:5173
+```
+
+![1](./Frontend/public/1.png)
+![2](./Frontend/public/2.png)
+![3](./Frontend/public/3.png)

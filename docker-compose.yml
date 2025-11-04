@@ -1,0 +1,60 @@
+version: "4.0"
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "5173:5173"
+    command: npm run dev
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:3001
+
+  backend:
+    build:
+      context: ./backend
+    container_name: backend
+    ports:
+      - "3001:3001"
+    environment:
+      - DB_HOST=mysql
+      - DB_USER=root
+      - DB_PASSWORD=1234
+      - DB_NAME=myapp
+
+      - JWT_SECRET_KEY=Sharkvortex
+
+      - PHONE_NUMBER=0987654321
+      - APPLICATION_KEY=l72b1a0ce1e5b74f34861c871685c999df
+      - APPLICATION_SECRET=388ce152964d4d0fb6fa7580a77ac007
+      - BILLER_ID=713800164302396
+      - MERCHANT_ID=204882460880896
+      - TERMINAL_ID=875354249420419
+      - NAME_SHOP=SHARKVORTEX
+    depends_on:
+      - mysql
+    command: >
+      sh -c "until nc -z mysql 3306;
+      do echo '⏳ Waiting for MySQL...'; sleep 2;
+      done;
+      npm start"
+
+  mysql:
+    image: mysql:8.0
+    container_name: my-database
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=myapp
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  mysql_data:
